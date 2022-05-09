@@ -1,0 +1,9 @@
+<h1>Hello Tatiana mora</h1>
+<p>All items will be displayed</p>
+<ul> 
+  <% @articles.each do |article| %>
+    <li>
+      <%= article.title %>
+    </li>  
+  <% end %>
+</ul>    
