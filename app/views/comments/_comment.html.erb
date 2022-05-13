@@ -10,13 +10,10 @@
     <%= comment.body %>
   </p>
 
-  <p>
+  <p class="text-center">
     <%= link_to "Destroy Comment", [comment.article, comment],  data: {
                 turbo_method: :delete,
                 turbo_confirm: "Are you sure?"
-              } %>
+              }, :class => "btn btn-primary" %>
   </p>
-
-  
  <% end %> 
-    
