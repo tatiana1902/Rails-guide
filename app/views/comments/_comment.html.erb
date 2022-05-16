@@ -9,11 +9,15 @@
     <strong>Comment:</strong>
     <%= comment.body %>
   </p>
-
-  <p class="text-center">
-    <%= link_to "Destroy Comment", [comment.article, comment],  data: {
-                turbo_method: :delete,
-                turbo_confirm: "Are you sure?"
-              }, :class => "btn btn-primary" %>
-  </p>
- <% end %> 
+  
+  <% if user_signed_in? %>
+    <% if current_user.id == @article.user_id %>
+      <p class="text-center">
+        <%= link_to "Destroy Comment", [comment.article, comment],  data: {
+                    turbo_method: :delete,
+                    turbo_confirm: "Are you sure?"
+                  }, :class => "btn btn-primary" %>
+      </p>
+    <% end %>  
+  <% end %>   
+<% end %> 
