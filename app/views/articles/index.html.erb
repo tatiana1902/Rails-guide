@@ -2,10 +2,6 @@
 
 <p class="text-center">Our blog has <%= Article.public_count %> articles!!</p>
 
-<div class="d-flex flex-row justify-content-center alig-items-center">
-    <%= image_tag('índice') %>  
-</div>
-
 <div class="mx-auto p-3" style="width: 240px;">
   <ul>
     <% @articles.each do |article| %>
