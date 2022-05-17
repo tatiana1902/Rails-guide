@@ -30,15 +30,14 @@
                 <%= form.select :status, ['public', 'private', 'archived'],  selected: 'public', class: 'form-control' %>
               </div>
             </div>
+
             
-            <p>Type in your ID found at the top:</p>
-                     
             <div class="form-group row m-5">
-              <%= form.label :user_id, class:'col-sm-2' %><br>
               <div class="col-sm-4">
-                <%= form.text_field :user_id, class: 'form-control' %>  
+                <%= form.hidden_field :user_id, :value => current_user.id %>  
               </div>
-            </div>
+            </div> 
+              
             
             <div class="text-center"> 
               <%= form.submit :class => "btn btn-primary"%>
