@@ -1,5 +1,16 @@
 Rails.application.routes.draw do
+  
+  devise_for :users
   root "articles#index"
+  
+  devise_scope :user do
+    get 'sign_out', to: 'devise/sessions#destroy'
+  end
+  
+  devise_scope :user do
+    get 'users', to: 'devise/registrations#update'
+  end
+  
 
   resources :articles do
     resources :comments

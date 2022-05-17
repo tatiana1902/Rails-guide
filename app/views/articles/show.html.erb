@@ -5,27 +5,34 @@
           <h2 class="text-center mt-4"><%= @article.title %></h2>
           <p class="text-center mt-2"><%= @article.body %></p>
           
-          <div class="d-flex flex-row justify-content-center alig-items-center">
-            <div style="margin: 10px">
-              <%= link_to "Edit", edit_article_path(@article), :class => "btn btn-primary" %>
-            </div>  
-            <div style="margin: 10px"> 
-              <%= link_to "Destroy", article_path(@article), data: {
-                            turbo_method: :delete,
-                            turbo_confirm: "Are you sure?"
-                          }, :class => "btn btn-primary" %> 
-            </div>
-          </div>   
+          <% if user_signed_in? %>
+            <% if current_user.id == @article.user_id %>
+              <div class="d-flex flex-row justify-content-center alig-items-center">
+                <div style="margin: 10px">
+                  <%= link_to "Edit", edit_article_path(@article), :class => "btn btn-primary" %>
+                </div>  
+                <div style="margin: 10px"> 
+                  <%= link_to "Destroy", article_path(@article), data: {
+                                turbo_method: :delete,
+                                turbo_confirm: "Are you sure?"
+                              }, :class => "btn btn-primary" %> 
+                </div>
+              </div>  
+             <% end %> 
+           <% end %>    
+                
           <h2 class="text-center mt-4">Comments</h2>  
           <div class="mx-auto p-3" style="width: 340px;" >   
             <%= render @article.comments %>   
           </div>
         </div>
         
-        <div class="col-md-4">
-          <h2 class="text-center mt-4">Add a comment:</h2>
-          <%= render 'comments/form' %>
-        </div>
+        <% if user_signed_in? %>
+          <div class="col-md-4">
+            <h2 class="text-center mt-4">Add a comment:</h2>
+            <%= render 'comments/form' %>
+          </div>
+        <% end %>
         
     </div>
 </div>                       
