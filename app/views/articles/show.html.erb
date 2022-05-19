@@ -1,5 +1,8 @@
 <div class="container">
     <div class="row justify-content-around">
+      <div class="col-md-2">
+        <%= link_to "Back", articles_path, :class => "btn btn-primary" %>
+      </div>
         <div class="col-md-4">
           <h1 class="text-center mt-4">The selected article is:</h1>
           <h2 class="text-center mt-4"><%= @article.title %></h2>
@@ -25,14 +28,29 @@
           <div class="mx-auto p-3" style="width: 340px;" >   
             <%= render @article.comments %>   
           </div>
+          
+          <% if user_signed_in? %>
+            <% if current_user.id != @article.user_id  %>
+              <div id="follow_form">
+                <% if current_user.following?@article.user %>
+                  <%= link_to "UnFollow", unfollow_user_path(@article.user), :class => "btn btn-primary"  %>
+                <% else %>
+                  <%= link_to "Follow", follow_user_path(@article.user), :class => "btn btn-primary"  %>
+                <% end %>    
+              </div>
+            <% end %>
+          <% end %>
+          
         </div>
         
         <% if user_signed_in? %>
-          <div class="col-md-4">
-            <h2 class="text-center mt-4">Add a comment:</h2>
-            <%= render 'comments/form' %>
-          </div>
+          <% if current_user.following?@article.user or current_user.id == @article.user_id%>
+            <div class="col-md-4">
+              <h2 class="text-center mt-4">Add a comment:</h2>
+              <%= render 'comments/form' %>
+            </div>
+          <% end %>
         <% end %>
-        
+             
     </div>
 </div>                       

@@ -7,12 +7,15 @@ Rails.application.routes.draw do
     get 'sign_out', to: 'devise/sessions#destroy'
   end
   
-  devise_scope :user do
-    get 'users', to: 'devise/registrations#update'
+  resources :users do
+    member do
+      get 'follow'
+      get 'unfollow'
+    end   
   end
-  
 
   resources :articles do
     resources :comments
+    
   end
 end
