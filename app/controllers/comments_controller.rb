@@ -5,7 +5,7 @@ class CommentsController < ApplicationController
 
   def create
     @article = Article.find(params[:article_id])
-    @comment = @article.comments.create(comment_params.merge(commenter: current_user.email))
+    @comment = @article.comments.create(comment_params)
     redirect_to article_path(@article)
   end
 
@@ -19,6 +19,6 @@ class CommentsController < ApplicationController
   private
 
   def comment_params
-    params.require(:comment).permit(:commenter, :body, :status, :user_id)
+    params.require(:comment).permit(:body, :status, :user_id)
   end
 end
