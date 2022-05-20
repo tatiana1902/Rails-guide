@@ -1,19 +1,16 @@
 <%= form_with model: [ @article, @article.comments.build ] do |form| %>
-  <p class="m-5"> 
-    <%= form.label :commenter %><br>
-    <%= form.text_field :commenter %>
-  </p>
-  
   <p class="m-5">
-    <%= form.label :body %><br>
+    <%= form.label :body, 'Comment' %><br>
     <%= form.text_area :body %>
   </p>
   
   <p class="m-5">
     <%= form.label :status%><br>
     <%= form.select :status, ['public', 'private', 'archived'],  selected: 'public'%>
-  </p> 
+  </p>
   
+  <%= form.hidden_field :user_id, :value => current_user.id %> 
+ 
   <p class="text-center">
     <%= form.submit :class => "btn btn-primary"%>
   </p>
